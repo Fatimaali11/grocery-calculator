@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grocery Bill Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.253);
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    input, button {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    button {
+      background-color: #afa54c;
+      color: white;
+      cursor: pointer;
+    }
+    
+    #total {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Grocery Bill Calculator</h1>
+    
+    <input type="text" id="item" placeholder="Item Name">
+    <input type="number" id="price" placeholder="Price">
+    
+    <button onclick="addItem()">Add Item</button>
+    
+    <table id="items-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    
+    <div id="total">Total: $0.00</div>
+  </div>
+  
+  <script>
+    let total = 0;
+    
+    function addItem() {
+      const item = document.getElementById("item").value;
+      const price = parseFloat(document.getElementById("price").value);
+      
+      if (item && price) {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${item}</td><td>$${price.toFixed(2)}</td>`;
+        document.getElementById("items-table").getElementsByTagName("tbody")[0].appendChild(row);
+        
+        total += price;
+        document.getElementById("total").textContent = `Total: $${total.toFixed(2)}`;
+        
+        document.getElementById("item").value = "";
+        document.getElementById("price").value = "";
+      }
+    }
+  </script>
+</body>
+</html>
